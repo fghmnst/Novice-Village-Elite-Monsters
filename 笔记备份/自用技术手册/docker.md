@@ -69,5 +69,5 @@ ojbk。接下来是docker常见指令：
 6. 状态：`docker stats
 7. 日志：`docker logs`
 8. 进入：`docker exec`
-   > 加上`--help`可查看帮助
+> 加上`--help`可查看帮助
    >
