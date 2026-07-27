@@ -62,12 +62,13 @@ ojbk。接下来是docker常见指令：
 **容器操作：**
 
 1. 删除容器：`docker rm`
-2. 运行：`docker run`
-3. 查看：`docker ps`
-4. 停止：`docker start`
-5. 重启：`docker restart`
-6. 状态：`docker stats
-7. 日志：`docker logs`
-8. 进入：`docker exec`
+2. 创建并启动新容器：`docker run`
+3. 启动已有容器：`docker start`
+4. 查看：`docker ps`
+5. 停止：`docker stop`
+6. 重启：`docker restart`
+7. 状态：`docker stats
+8. 日志：`docker logs`
+9. 进入：`docker exec`
 > 加上`--help`可查看帮助
    >
