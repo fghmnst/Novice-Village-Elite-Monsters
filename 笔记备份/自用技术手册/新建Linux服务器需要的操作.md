@@ -360,7 +360,8 @@ PermitRootLogin no
 改完后检查配置：
 
 ```shell
-sudo sshd -t
+sudo sshd -t #检查格式十分正确，无输出则正确
+sudo sshd -T | grep passwordauthentication #检查到底能不能用密码登陆
 ```
 
 重启服务：
@@ -378,6 +379,48 @@ ssh fghmnst@服务器IP
 ```
 
 确认新连接能登录，再关闭旧窗口。
+***
+### 实践中遇到的其他问题
+现在是2026年7月31日，距离我第一次创建并修改我的某个Ubuntu云服务器已经过去了快两个月，但是我今天用其他电脑远程登陆时，发现我的ssh密码登陆并没有成功关闭。
+
+默认ssh远程登陆密码是等于sudo密码的，据说可以修改但现在哥们折腾了一上午已经懒得去了解了。而哥们的sudo密码又向来是非常简单的，这显然是不大合适的。
+
+在我们根据上述步骤关闭密码登陆后，在云服务器端执行
+```shell
+sudo sshd -T | grep passwordauthentication
+```
+有可能像我一样输出
+```shell
+passwordauthentication yes
+```
+这就意味着你修改了个寂寞，不放心的话你也可以在windows终端中输入
+
+```shell
+ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password 用户@服务器公网IP
+```
+，如果让你接着输密码就说明你没有把密码登陆ban掉，如果输出
+```shell
+Permission denied (publickey)
+```
+则说明成功ban掉密码登陆了，安全系数+750。
+
+我的解决方法：
+首先
+```shell
+sudo grep -R "PasswordAuthentication" /etc/ssh/
+```
+
+这样可以获取所有的sshd（服务端）的config文件，注意不用管ssh（客户端）的配置文件。
+
+不出意料的话不止一个sshd相关的config文件，同时备份文件不生效也不用管。大概率问题出在排在第一个的文件。
+
+我这边是：
+```shell
+/etc/ssh/sshd_config.d/50-cloud-init.conf
+```
+编辑这个文件即可，记得重启ssh。但据chatgpt所说这么做有复原的风险，因为这个文件是云服务器自己生成的。
+
+不管，后面出了问题我接着回过头来修改。
 
 # \*文件传输
 

@@ -32,7 +32,9 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-如果网络环境正常的话，理论上这一路下来可以十分爽快地复制粘贴，接下来设置sudo组，免得搞个docker回回得输入sudo
+如果网络环境正常的话，理论上这一路下来可以十分爽快地复制粘贴，接下来设置sudo组，免得搞个docker回回得输入sudo。
+>*现在是2026年7月31日，我在配置syncplay服务端的时候得知这种情况最好单独给软件设置一个用户`sudo useradd -r syncplay`，`-r`（或 `--system`）：将用户创建为系统用户（System User）*
+>*这么做据说更规范点，因为可以做到更好的权限隔离，由于系统用户无法使用su命令进入，接下来要么使用命令`sudo -u syncplay -s`进入syncplay特有权限shell终端；要么在命令前都加上`sudo -u syncplay`；要么在最后修改权限`sudo chown -R syncplay:syncplay /opt/syncplay`*
 
 ```shell
 # 1. 创建 docker 用户组（如果已存在会提示，无影响）
@@ -72,3 +74,8 @@ ojbk。接下来是docker常见指令：
 9. 进入：`docker exec`
 > 加上`--help`可查看帮助
    >
+
+**run 细节：**
+
+1. `docker run -d`后台启动
+2. `docker run -d --name aaa bbb`以aaa名称后台启动镜像bbb
