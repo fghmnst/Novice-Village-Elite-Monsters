@@ -51,3 +51,8 @@ c和cpp复健内容，之前有段时间为了应付考试刷了很多学校往�
 下面这个需要连校园网：
 
 [校园网下载站](https://download.anhuiuniversity.icu/)
+
+# DianDengMaster
+*点灯带师*
+
+我打算玩玩stm32，目前在用一套我自己搭建的AI工作流来辅助帮我从零开始入门stm32，等stm32小项目和AI工作流都比较成熟了我再补充更详细的内容。
