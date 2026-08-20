@@ -1,0 +1,12 @@
+# 构建产物
+build/
+mx.scratch
+*.o
+*.elf
+*.bin
+*.hex
+
+# Python
+__pycache__/
+*.pyc
+.venv/
